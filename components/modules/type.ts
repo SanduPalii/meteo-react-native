@@ -5,15 +5,15 @@ export interface Coordinates {
 
 export interface Address {
   address: {
-    city: string;
-    village: string;
+    city?: string;
+    village?: string;
     town?: any;
   };
 }
 
 export interface HomeProps {
-  city: any;
-  weather: any;
+  city?: any;
+  weather?: any;
 }
 
 export interface WeatherData {

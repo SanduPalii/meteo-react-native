@@ -17,6 +17,7 @@ function Home({ weather, city }: HomeProps) {
     <>
       <View className="h-2/5 ">
         <MeteoBasic
+          dailyWeather={weather.daily}
           city={city}
           interpretation={currentInterpretation}
           temperature={Math.round(currentWeather.temperature)}

@@ -1,23 +1,15 @@
-import { ReactNode } from 'react';
+import { ReactNode, TextareaHTMLAttributes } from 'react';
 import { Text, StyleProp, TextStyle, StyleSheet } from 'react-native';
-
+import { twMerge } from 'tailwind-merge';
 interface TxtProps {
   children: ReactNode;
-  style?: StyleProp<TextStyle>;
+  className?: string;
 }
 
-export function Txt({ children, style, ...restProps }: TxtProps) {
+export function Txt({ children, className, ...restProps }: TxtProps) {
   return (
-    <Text style={[s.defaultStyle, style]} {...restProps}>
+    <Text className={twMerge('font-alata text-2xl color-white', className)} {...restProps}>
       {children}
     </Text>
   );
 }
-
-const s = StyleSheet.create({
-  defaultStyle: {
-    fontFamily: 'Alata', // Assuming you have this font available
-    fontSize: 30, // Default font size
-    color: 'white',
-  },
-});

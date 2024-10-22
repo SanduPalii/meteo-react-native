@@ -3,11 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Address, Coordinates, WeatherData } from '~/components/modules/type';
 import MeteoAPI from '~/components/api/meteo';
 import { useFonts } from 'expo-font';
-import Home from './Home';
-import bgImage from 'assets/background.png';
-import { ImageBackground, View } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { Txt } from '~/components/Txt';
+import Home from '../components/Home';
+import ImgBg from '~/components/styles/ImageBackground.style';
 
 export default function App() {
   const [coordinates, setCoordinates] = useState<Coordinates>();
@@ -46,17 +43,5 @@ export default function App() {
     }
   }
 
-  return (
-    <ImageBackground
-      imageStyle={{ opacity: 0.75 }}
-      source={bgImage}
-      resizeMode="cover"
-      className="flex-1 bg-black">
-      <SafeAreaProvider>
-        <SafeAreaView className="flex-1 p-5">
-          {isFontLoaded && <Home city={city} weather={weather} />}
-        </SafeAreaView>
-      </SafeAreaProvider>
-    </ImageBackground>
-  );
+  return <ImgBg>{isFontLoaded && <Home city={city} weather={weather} />}</ImgBg>;
 }

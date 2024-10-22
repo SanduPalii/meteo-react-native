@@ -1,15 +1,25 @@
-import { Image, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { Txt } from './Txt';
 import Clock from './Clock';
+import { useRouter } from 'expo-router';
 
 interface MeteoProps {
   temperature: number;
   interpretation: any;
   city: string;
+  dailyWeather: any;
 }
 
-const MeteoBasic = ({ temperature, interpretation, city }: MeteoProps) => {
+const MeteoBasic = ({ temperature, interpretation, city, dailyWeather }: MeteoProps) => {
+  const router = useRouter();
+  const navigateToForecasts = () => {
+    router.push({
+      pathname: '/Forecasts',
+      params: { city, ...dailyWeather },
+    });
+  };
+
   return (
     <>
       <View className="items-end">
@@ -19,10 +29,12 @@ const MeteoBasic = ({ temperature, interpretation, city }: MeteoProps) => {
         <Txt>{city}</Txt>
       </View>
       <View className="items-end">
-        <Txt style={{ fontSize: 20, transform: [{ rotate: '-90deg' }] }}>Sunny</Txt>
+        <Txt className="-rotate-90 text-xl">Sunny</Txt>
       </View>
       <View className="flex-row items-baseline justify-between">
-        <Txt style={{ fontSize: 150 }}>{temperature}°</Txt>
+        <TouchableOpacity onPress={navigateToForecasts}>
+          <Txt className="text-10xl">{temperature}°</Txt>
+        </TouchableOpacity>
         <Image source={interpretation.image} className="h-40 w-40" />
       </View>
     </>
