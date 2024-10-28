@@ -4,8 +4,9 @@ import MeteoBasic from '~/components/MeteoBasic';
 import { getWeatherInterpretation } from '~/utils/meteo-utils';
 import MeteoAdvanced from '~/components/MeteoAdvanced';
 import { HomeProps } from '~/components/modules/type';
+import SearchBar from '../components/SearchBar';
 
-function Home({ weather, city }: HomeProps) {
+function Home({ weather, city, onSubmitSearch }: HomeProps) {
   if (!weather || !weather.current_weather) {
     return <Text>Loading...</Text>;
   }
@@ -24,7 +25,7 @@ function Home({ weather, city }: HomeProps) {
         />
       </View>
       <View className="h-2/5 ">
-        <Text className="text-2xl color-blue-100">Search Bar</Text>
+        <SearchBar onSubmit={onSubmitSearch} />
       </View>
       <View className="h-1/5">
         <MeteoAdvanced

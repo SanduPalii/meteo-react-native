@@ -1,5 +1,5 @@
 export interface WeatherInterpretations {
-  codes: number;
+  codes: number[];
   lable: string;
   image: any;
 }
@@ -32,6 +32,8 @@ export const WEATHER_INTERPRETATION = [
   },
 ];
 
-export function getWeatherInterpretation(code: any) {
+export function getWeatherInterpretation(code: number): object | undefined {
   return WEATHER_INTERPRETATION.find((interpretation) => interpretation.codes.includes(code));
 }
+
+export const DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];

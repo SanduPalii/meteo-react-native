@@ -8,7 +8,7 @@ interface TxtProps {
 
 export function Txt({ children, className, ...restProps }: TxtProps) {
   return (
-    <Text className={twMerge('font-alata text-2xl color-white', className)} {...restProps}>
+    <Text className={twMerge('font-alata text-3xl color-white', className)} {...restProps}>
       {children}
     </Text>
   );

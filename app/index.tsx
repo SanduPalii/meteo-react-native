@@ -1,10 +1,11 @@
 import { requestBackgroundPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import React, { useEffect, useState } from 'react';
-import { Address, Coordinates, WeatherData } from '~/components/modules/type';
+import { Address, Coordinates, HomeProps, WeatherData } from '~/components/modules/type';
 import MeteoAPI from '~/components/api/meteo';
 import { useFonts } from 'expo-font';
 import Home from '../components/Home';
 import ImgBg from '~/components/styles/ImageBackground.style';
+import { Alert } from 'react-native';
 
 export default function App() {
   const [coordinates, setCoordinates] = useState<Coordinates>();
@@ -33,6 +34,17 @@ export default function App() {
     setCity(cityResponse);
   }
 
+  async function fetchCoordsByCity(city: HomeProps) {
+    try {
+      const coordsResponse = await MeteoAPI.fetchCoordsByCity(city);
+      setCoordinates(coordsResponse);
+    } catch (err: string | unknown) {
+      if (typeof err === 'string') {
+        Alert.alert('Aouch!', err);
+      }
+    }
+  }
+
   async function getUserCoordinates() {
     const { status } = await requestBackgroundPermissionsAsync();
     if (status === 'granted') {
@@ -43,5 +55,9 @@ export default function App() {
     }
   }
 
-  return <ImgBg>{isFontLoaded && <Home city={city} weather={weather} />}</ImgBg>;
+  return (
+    <ImgBg>
+      {isFontLoaded && <Home city={city} weather={weather} onSubmitSearch={fetchCoordsByCity} />}
+    </ImgBg>
+  );
 }

@@ -6,9 +6,9 @@ const ForecastListItem = ({ image, day, date, temperature }: any) => {
   return (
     <View className="flex-row items-center justify-between">
       <Image source={image} className="h-10 w-10" />
-      <Txt className="text-xl">{day}</Txt>
-      <Txt className="text-xl">{date}</Txt>
-      <Txt className="min-w-12 text-xl">{temperature}°</Txt>
+      <Txt className="text-2xl">{day}</Txt>
+      <Txt className="text-2xl">{date}</Txt>
+      <Txt className="min-w-12 text-2xl">{temperature}°</Txt>
     </View>
   );
 };

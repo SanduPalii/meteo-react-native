@@ -4,7 +4,7 @@ import { Txt } from './Txt';
 import Clock from './Clock';
 import { useRouter } from 'expo-router';
 
-interface MeteoProps {
+export interface MeteoProps {
   temperature: number;
   interpretation: any;
   city: string;
@@ -16,9 +16,10 @@ const MeteoBasic = ({ temperature, interpretation, city, dailyWeather }: MeteoPr
   const navigateToForecasts = () => {
     router.push({
       pathname: '/Forecasts',
-      params: { city, ...dailyWeather },
+      params: { city, interpretation, temperature, ...dailyWeather },
     });
   };
+  // console.log(typeof interpretation);
 
   return (
     <>

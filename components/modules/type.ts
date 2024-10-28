@@ -14,6 +14,7 @@ export interface Address {
 export interface HomeProps {
   city?: any;
   weather?: any;
+  onSubmitSearch: any;
 }
 
 export interface WeatherData {

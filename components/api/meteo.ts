@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Address, Coordinates } from '../modules/type';
+import { Address, Coordinates, HomeProps } from '../modules/type';
 
 export class MeteoAPI {
   static async fetchWeatherByCoords(coords: Coordinates) {
@@ -15,6 +15,19 @@ export class MeteoAPI {
     );
     const { address }: Address = response.data;
     return address.city || address.village || address.town;
+  }
+
+  static async fetchCoordsByCity(city: HomeProps) {
+    try {
+      const response = await axios.get(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`
+      );
+      const { latitude: lat, longitude: lng }: { latitude: number; longitude: number } =
+        response.data.results[0];
+      return { lat, lng };
+    } catch (err) {
+      throw 'Invalid city name!!!';
+    }
   }
 }
 

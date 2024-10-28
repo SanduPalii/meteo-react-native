@@ -11,10 +11,12 @@ module.exports = {
     fontFamily: {
       alata: 'Alata-Regular',
     },
-    fontSize: {
-      '10xl': '9.375rem',
+
+    extend: {
+      fontSize: {
+        '10xl': '9.375rem',
+      },
     },
-    extend: {},
   },
   plugins: [],
 };
